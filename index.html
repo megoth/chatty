@@ -16,46 +16,65 @@
 	<div class="container">
 		<h1>Livecoding a web-based chat-client</h1>
 		<p>By <a href="http://icanhasweb.net/">Arne Hassel</a>.</p>
-		<p><a href="https://github.com/megoth/chatty">A simple chat-client</a> based on popular JavaScript libraries.</p>
-		<ul>
-			<li>
-				<a href="http://angularjs.org/">Angular.JS</a>
-			</li>
-			<li>
-				<a href="http://socket.io/">Socket.IO</a>
-			</li>
-			<li>
-				<a href="http://nodejs.org/">Node.js</a>
-			</li>
-			<li>
-				<a href="http://expressjs.com/">Express</a>
-			</li>
-			<li>
-				<a href="http://getbootstrap.com/">Bootstrap</a>
-			</li>
-			<li>
-				<a href="http://bower.io/">Bower</a>
-			</li>
-		</ul>
-		<p>Put together for presentation for <a href="http://sonen.ifi.uio.no/">Åpen Sone for Eksperimentell Informatikk</a>.</p>
-		<div ng-controller="ChatController">
-			<h2>Chatty</h2>
-			<p>This is the result we're going for.</p>
-			<form class="form-inline" name="messageForm" role="form" ng-submit="sendMsg()">
-				<div class="form-group">
-					<input class="form-control" name="nick" ng-model="nick" placeholder="Nickname" required type="text" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" name="message" ng-model="message" placeholder="Message" required type="text" />
-				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
-			<ul>
-				<li ng-repeat="msg in messages | limitTo:10">
-					<strong>{{msg.nick}}</strong>
-					<span>{{msg.message}}</span>
-				</li>
-			</ul>
+		<div class="row">
+			<div class="col-md-4" ng-controller="ChatController">
+				<h2>Chatty</h2>
+				<p>This is the result we're going for.</p>
+				<form name="messageForm" role="form" ng-submit="sendMsg()">
+					<div class="form-group">
+						<label for="nick">Nickname</label>
+						<input class="form-control" name="nick" ng-model="nick" placeholder="Nickname" required type="text" />
+					</div>
+					<div class="form-group">
+						<label for="nick">Message</label>
+						<input class="form-control" name="message" ng-model="message" placeholder="Message" required type="text" />
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+				<p class="alert alert-info" ng-show="messages.length == 0">No messages yet; you should submit a message.</p>
+				<ul>
+					<li ng-repeat="msg in messages | limitTo:10">
+						<strong>{{msg.nick}}</strong>
+						<span>{{msg.message}}</span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<h2>How it works</h2>
+				<p>Open this website in two browsers/tabs. Once you send a message in one, it will show in the other.</p>
+				<p>Once you open this website, a connection is made to the server with a socket. This connection is maintained between multiple instances, making it possible to send messages between them.</p>
+				<p>This messages are then handled by a simple application, that handles the communication so that updates are shown on the website.</p>
+				<h3>Noteworthy shortcomings</h3>
+				<p>There is no persistent storage of messages, as Heroku doesn't support <a href="https://addons.heroku.com/mongohq">MongoHQ</a> in Europe.</p>
+			</div>
+			<div class="col-md-4">
+				<h2>What it is</h2>
+				<p><a href="https://github.com/megoth/chatty">A simple chat-client</a> based on libraries and services.</p>
+				<ul>
+					<li>
+						<a href="http://angularjs.org/">Angular.JS</a>
+					</li>
+					<li>
+						<a href="http://socket.io/">Socket.IO</a>
+					</li>
+					<li>
+						<a href="https://www.heroku.com/">Heroku</a>
+					</li>
+					<li>
+						<a href="http://nodejs.org/">Node.js</a>
+					</li>
+					<li>
+						<a href="http://expressjs.com/">Express</a>
+					</li>
+					<li>
+						<a href="http://getbootstrap.com/">Bootstrap</a>
+					</li>
+					<li>
+						<a href="http://bower.io/">Bower</a>
+					</li>
+				</ul>
+				<p>Put together for presentation for <a href="http://sonen.ifi.uio.no/">Åpen Sone for Eksperimentell Informatikk</a>.</p>
+			</div>
 		</div>
 	</div>
 </body>
