@@ -1,16 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="ChattyApp">
 <head>
+	<title>Livecoding a web-based chat-client</title>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<script src="/socket.io/socket.io.js"></script>
-	<script>
-	var socket = io.connect('http://localhost');
-	socket.on('news', function (data) {
-	console.log(data);
-	socket.emit('my other event', { my: 'data' });
-	});
-	</script>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="src/chat.js"></script>
+	
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 </head>
 <body>
-test
+	<div class="container">
+		<h1>Livecoding a web-based chat-client</h1>
+		<p>By <a href="http://icanhasweb.net/">Arne Hassel</a>.</p>
+		<p>A simple chat-client based on popular JavaScript libraries.</p>
+		<ul>
+			<li>
+				<a href="http://angularjs.org/">Angular.JS</a>
+			</li>
+			<li>
+				<a href="http://socket.io/">Socket.IO</a>
+			</li>
+			<li>
+				<a href="http://nodejs.org/">Node.js</a>
+			</li>
+			<li>
+				<a href="http://expressjs.com/">Express</a>
+			</li>
+			<li>
+				<a href="http://getbootstrap.com/">Bootstrap</a>
+			</li>
+			<li>
+				<a href="http://bower.io/">Bower</a>
+			</li>
+		</ul>
+		<p>Put together for presentation for <a href="http://sonen.ifi.uio.no/">Åpen Sone for Eksperimentell Informatikk</a>.</p>
+		<div ng-controller="ChatController">
+			<h2>Chatty</h2>
+			<p>This is the result we're going for (but it's going to be simpler in the presentation).</p>
+			<form class="form-inline" name="messageForm" role="form" ng-submit="sendMsg()">
+				<div class="form-group">
+					<input class="form-control" name="nick" ng-model="nick" placeholder="Nickname" required type="text" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" name="message" ng-model="message" placeholder="Message" required type="text" />
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+			<ul>
+				<li ng-repeat="msg in messages | limitTo:10">
+					<strong>{{msg.nick}}</strong>
+					<span>{{msg.message}}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
 </body>
 </html>

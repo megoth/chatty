@@ -8,10 +8,15 @@ app.configure(function () {
 	app.use("/", express.static(__dirname));
 });
 var io = socket.listen(app.listen(port));
+var connections = [];
 io.sockets.on('connection', function (socket) {
-	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data) {
-		console.log(data);
+	socket.emit('history', []);
+	socket.on('newMessage', function (message) {
+		console.log("NEW MESSAGE", message);
+		connections.forEach(function (oldSocket) {
+			oldSocket.emit('newMessage', message);
+		});
 	});
+	connections.push(socket);
 });
 console.log("Express server running on http://localhost:" + port);
