@@ -1,12 +1,17 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
+var socket = require('socket.io');
+//var chat = require('./chat');
 
 app.configure(function () {
-    app.use(
-        "/", //the URL throught which you want to access to you static content
-        express.static(__dirname) //where your static content is located in your filesystem
-    );
+	app.use("/", express.static(__dirname));
 });
-app.listen(port); //the port you want to use
+var io = socket.listen(app.listen(port));
+io.sockets.on('connection', function (socket) {
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
+});
 console.log("Express server running on http://localhost:" + port);
