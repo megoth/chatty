@@ -10,14 +10,12 @@ angular.module('ChattyApp', [])
 			});
 		});
 		socket.on('newMessage', function (message) {
-			console.log("NEW MESSAGE", message);
 			$scope.$apply(function () {
 				$scope.messages.unshift(message);
 			});
 		});
 
 		$scope.sendMsg = function () {
-			console.log("SENDING MSG");
 			socket.emit('newMessage', { nick: $scope.nick, message: $scope.message });
 		};
 	}]);
