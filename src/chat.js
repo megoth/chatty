@@ -3,7 +3,8 @@ angular.module('ChattyApp', [])
 		$scope.messages = [];
 		$scope.nick = "test";
 		$scope.message = "test";
-		var socket = io.connect('/');
+		var host = location.origin.replace(/^http/, 'ws')
+		var socket = io.connect(host);
 		socket.on('history', function (oldMessages) {
 			$scope.$apply(function () {
 				$scope.messages = oldMessages;
