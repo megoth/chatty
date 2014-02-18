@@ -9,10 +9,10 @@ Setup
 * Install [node.js](http://nodejs.org/)
 * Clone this repo ([tutorial](https://www.atlassian.com/git/tutorial/git-basics#!clone))
 * Open up a command-window, navigate to your local repo
-** `npm install` (ignore errors that may appear at the end)
-** `npm install -g bower`
-** `bower install`
-** `node web.s` (alternatively `node .\web.js` in windows)
+⋅⋅* `npm install` (ignore errors that may appear at the end)
+⋅⋅* `npm install -g bower`
+⋅⋅* `bower install`
+⋅⋅* `node web.s` (alternatively `node .\web.js` in windows)
 
 Enjoy ^_^
 
